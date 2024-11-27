@@ -3,3 +3,5 @@
 pip install -r requirements.txt
 
 python mirror.py
+
+# 灵感源自：https://github.com/DHBin/ai-connect
