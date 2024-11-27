@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+httpx
+jinja2
+pydantic
+pydantic-settings
+brotli
+aiohttp
+pyyaml

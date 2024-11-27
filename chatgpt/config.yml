@@ -1,0 +1,9 @@
+mirror:
+  host: "127.0.0.1"
+  port: 8080
+  redirect_uri: "https://connect.yeelo.fun"
+  tls:
+    enabled: false
+    cert: "path/to/cert.pem"  # 如果启用TLS
+    key: "path/to/key.pem"    # 如果启用TLS
+  token: ""
