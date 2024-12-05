@@ -67,6 +67,7 @@
     <link rel="modulepreload" href="{{StaticPrefixUrl }}/assets/jjr9on9cxlrbskjq.js"/>
     <link rel="stylesheet" href="{{StaticPrefixUrl }}/assets/root-iyb3qk9s.css"/>
     <link rel="stylesheet" href="{{StaticPrefixUrl }}/assets/conversation-small-cll5buey.css"/>
+<!--    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">-->
 </head>
 <body class="">
 <script>
@@ -257,6 +258,15 @@
 <div aria-live="polite" aria-atomic="true" class="sr-only"></div>
 <audio class="fixed bottom-0 left-0 hidden h-0 w-0" autoPlay="" crossorigin="anonymous"></audio>
 <script nonce="42b0430e-a794-4be1-9fca-a40066d5aab1">
+    REDIRECT_URI = "{{REDIRECT_URI}}";
+    document.addEventListener('DOMContentLoaded', function() {
+        // 检查cookie中是否存在m_token
+        if (!document.cookie.split(';').some(cookie =>
+            cookie.trim().startsWith('share_token='))) {
+            // 不存在则跳转
+            window.location.href = REDIRECT_URI;
+        }
+    });
     window.__remixContext = {
         "basename": "/",
         "future": {

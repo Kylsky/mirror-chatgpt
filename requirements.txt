@@ -4,6 +4,11 @@ httpx
 jinja2
 pydantic
 pydantic-settings
-brotli
+brotli~=1.1.0
 aiohttp
-pyyaml
+pyyaml~=6.0.2
+requests~=2.32.3
+flask~=3.1.0
+redis
+hiredis
+cloudscraper
