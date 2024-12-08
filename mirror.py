@@ -164,8 +164,11 @@ def handle_index(path: str = None):
 
 @app.route('/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE', 'PATCH'])
 def proxy(path: str):
+    access_token = request.headers.get('Authorization')
     share_token = request.cookies.get("share_token")
-    if share_token is not None:
+    if access_token is not None and access_token.startswith("Bearer "):
+        access_token = access_token.replace("Bearer ", "")
+    elif access_token is None and share_token is not None:
         access_token = redis_utils.hash_get("share_token_info:" + share_token, 'access_token')
         if access_token is None:
             return '', 401
@@ -190,7 +193,7 @@ def proxy(path: str):
             headers[
                 'Authorization'] = f"Bearer {access_token}"
             # 设置cookie
-            header_ck = 'share_token=' + share_token
+            header_ck = 'share_token=' + share_token if share_token is not None else ''
             global cf_cookie
             for cf_ck in cf_cookie:
                 if cf_ck['name'] != '__cf_bm':
@@ -222,7 +225,7 @@ def proxy(path: str):
         return str(e), 500
 
     share_token = request.cookies.get("share_token")
-    username = redis_utils.hash_get("share_token_info:" + share_token, 'user_name')
+    username = redis_utils.hash_get("share_token_info:" + share_token, 'user_name') if share_token is not None else ''
     # conversation 接口采取流式输出
     if path == 'backend-api/conversation':
         data = stream_response(username, resp, redis_utils)
