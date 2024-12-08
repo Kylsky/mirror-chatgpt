@@ -1,3 +1,5 @@
+import os
+
 import requests
 from typing import Dict, List, Optional
 from http.cookies import SimpleCookie
@@ -96,7 +98,7 @@ def test_cookies():
     cf_session = CloudflareSession()
 
     # 使用代理（可选）
-    proxy = "http://127.0.0.1:7890"
+    proxy = os.getenv("PROXY", None)
 
     result = cf_session.get_cloudflare_cookies(
         url="https://chatgpt.com",
